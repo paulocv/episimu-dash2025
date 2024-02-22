@@ -1,4 +1,4 @@
-baseURL = 'https://CHANGETHIS.org/'
+# baseURL = 'https://paulocv.github.io/episimu-dash2024/'
 languageCode = 'en-us'
 title = 'EpiSimu 2024'
 theme = 'relearn'
