@@ -5,7 +5,8 @@ draft: false
 ---
 
 <body>
-
+    <div><p id="statusMessage" style="color: chocolate;"></p></div>
+    
     <button id="refreshButton" class="btn cstyle interactive primary" 
     style="padding: 16px 32px;font-size: 16px;">
         Refresh data
@@ -37,23 +38,35 @@ draft: false
         console.group("load_json_data")
         console.log(`Fetching data from ${_url}`)
         
-        // // -()- Appends a time stamp to the request URL
-        // let timestamp = new Date().getTime();
-        // let updatedUrl = `${_url}?timestamp=${timestamp}`;
-        // let response = await fetch(updatedUrl, {cache: "reload"})
-        
-        // -()- Uses the url as it is
-        // TODO - Add error handling for Cross-Origin Request Blocked
-        let response = await fetch(_url, {cache: "reload"})
-        console.log("response = ", response)
+        let response;
+        try {
+            response = await fetch(_url, {cache: "reload"});
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            console.log("response = ", response);
+        } catch (error) {
+            console.error("Failed to fetch data:", error);
+            document.getElementById("statusMessage").innerHTML = `Failed to fetch data: ${error}`
+            console.groupEnd();
+            // return null; // or throw the error, or handle it in another appropriate way
+            throw error;
+        }
 
-        console.log("Parsing response as json")
-        obj = JSON.parse(await response.text())
-        console.log("obj = ", obj)
-
-        console.groupEnd()
+        console.log("Parsing response as json");
+        let obj;
+        try {
+            obj = JSON.parse(await response.text());
+        } catch (error) {
+            console.error("Failed to parse response as JSON:", error);
+            console.groupEnd();
+            return null; // or throw the error, or handle it in another appropriate way
+        }
         
-        return obj
+        console.log("obj = ", obj);
+        console.groupEnd();
+        
+        return obj;
     }
 
 
