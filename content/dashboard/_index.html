@@ -1,0 +1,197 @@
+---
+title: "Dashboard"
+date: 2024-02-19T19:30:09-05:00
+draft: false
+---
+
+<body>
+
+    <button id="refreshButton" class="btn cstyle interactive primary" 
+    style="padding: 16px 32px;font-size: 16px;">
+        Refresh data
+    </button>
+
+    <div id="weeklyPlots" style="text-align: center; height: 500px"></div>
+    <div id="dailyPlots" style="text-align: center; height: 500px"></div>
+    <div id="testPlot" style="text-align: center; height: 500px"></div>
+
+
+<!-- ======================================== -->
+<!--  CUSTOM SCRIPTS  -->
+
+
+<script src="/js/plotly-2.29.1.min.js" charset="utf-8"></script>
+
+<script id="init">
+    // Code to run on page load
+
+    console.log("Hello, World!");
+
+
+
+    // ============================================
+    // ATTEMPT TO FETCH DATA FROM GCLOUD
+    // ============================================
+
+    async function load_json_data(_url){
+        console.group("load_json_data")
+        console.log(`Fetching data from ${_url}`)
+        
+        // // -()- Appends a time stamp to the request URL
+        // let timestamp = new Date().getTime();
+        // let updatedUrl = `${_url}?timestamp=${timestamp}`;
+        // let response = await fetch(updatedUrl, {cache: "reload"})
+        
+        // -()- Uses the url as it is
+        // TODO - Add error handling for Cross-Origin Request Blocked
+        let response = await fetch(_url, {cache: "reload"})
+        console.log("response = ", response)
+
+        console.log("Parsing response as json")
+        obj = JSON.parse(await response.text())
+        console.log("obj = ", obj)
+
+        console.groupEnd()
+        
+        return obj
+    }
+
+
+    // ---------------------------------------------------
+    // PLOTLY
+    // ---------------------------------------------------
+
+    async function plot_all_json_data(data_obj){
+        console.group("plot_all_json_data")
+
+        // ============================
+        // General plot setup
+        // ============================
+        var plotlyConfig = {
+            responsive: true,
+            modeBarButtonsToRemove: ["select2d", "lasso2d"],
+        };
+
+        var plotlyLayout = {
+            legend: {
+                x: 0.02,
+                xanchor: 'left',
+                y: 1
+            },
+                font: {
+                // family: 'Courier New, monospace',
+                // size: 18,
+                color: '#808080'
+            },
+            margin: { t: 50, b: 50, l: 50, r: 50 },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            colorway : ['#7dc903', '#282828', '#3f6502', '#a8a8a8']
+        };
+
+
+        // ============================
+        // Weekly Plots
+        // ============================
+        var weeklyPlots = document.getElementById("weeklyPlots");
+
+        // Get elements of `data_obj` that start with "weekly_", push each one into an array
+        const weeklyData = Object
+            .keys(data_obj)
+            .filter(key => key.startsWith("weekly_"))
+            .map(key => data_obj[key]);
+        console.log("weeklyData = ", weeklyData);
+
+        // Create an inherited layout for the weekly plots
+        var weeklyLayout = {
+            ...plotlyLayout,
+            title: 'Weekly Data',
+            // xaxis:{gridcolor: '#80808040'},
+            yaxis:{gridcolor: '#80808040'},
+        }; 
+
+        Plotly.newPlot(
+            weeklyPlots,
+            weeklyData,
+            weeklyLayout,
+            plotlyConfig
+        )
+        console.log("Weekly plots done")
+
+
+        // ============================
+        // Daily Plots
+        // ============================
+        var dailyPlots = document.getElementById("dailyPlots");
+        
+        // Get elements of `data_obj` that start with "daily_", push each one into an array
+        const dailyData = Object
+            .keys(data_obj)
+            .filter(key => key.startsWith("daily_"))
+            .filter(key => key.endsWith("_data"))
+            .map(key => data_obj[key]);
+        console.log("dailyData = ", dailyData);
+
+        // Create an inherited layout for the daily plots
+        var dailyLayout = {
+            ...plotlyLayout,
+            title: 'Daily Data',
+            xaxis:{gridcolor: '#80808040'},
+            yaxis:{gridcolor: '#80808040'}
+        };
+
+        Plotly.newPlot(
+            dailyPlots,
+            dailyData,
+            dailyLayout,
+            plotlyConfig
+        );
+        console.log("Daily plots done")
+        
+        // // ============================
+        // // Test Plot
+        // // ============================
+        // var testPlot = document.getElementById("testPlot");
+
+        // // --- Traces
+        // var mybars = {
+        //     type: "bar",
+        //     visible: true,
+        //     x: [1, 2, 3, 4, 5],
+        //     y: [1, 2, 4, 8, 12] 
+        // }
+
+        // // // --- Layout
+        // // var layout = {
+        // //     title: 'simple example',
+        // //     // margin: { t: 0 } 
+        // // }
+
+        // // // --- Configuration
+        // // var config = {
+        // //     responsive: true
+        // // }
+
+        // Plotly.newPlot( 
+        //     testPlot, 
+        //     [mybars], 
+        //     plotlyLayout,
+        //     plotlyConfig
+        // );
+
+        console.log("Plot done")
+        console.groupEnd()
+    }
+
+    
+    // load_text_data("https://storage.cloud.google.com/js-miniproj-413314/time_series.csv")
+    
+    load_json_data("/plot_data.json")
+    .then(plot_all_json_data)
+
+
+
+</script>
+
+
+</body>

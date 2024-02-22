@@ -1,6 +1,6 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://CHANGETHIS.org/'
 languageCode = 'en-us'
-title = 'Interactive Epidemic Simulation 2024'
+title = 'EpiSimu 2024'
 theme = 'relearn'
 [params]
   themeVariant = [  "relearn-light", "relearn-dark", ]
