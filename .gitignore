@@ -3,3 +3,5 @@
 ### CUSTOM user ignores
 .DS_Store
 */.DS_Store
+.hugo_build.lock
+etc/gcloud-cors-config.json
