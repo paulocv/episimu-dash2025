@@ -3,10 +3,16 @@ title: "Dashboard"
 date: 2024-02-19T19:30:09-05:00
 draft: false
 ---
+<!-- <!DOCTYPE html> -->
+<head>
+
+</head>
 
 <body>
     <div><p id="statusMessage" style="color: chocolate;"></p></div>
-    
+
+    <!-- <p id="TEST">   </p> -->
+
     <button id="refreshButton" class="btn cstyle interactive primary" 
     style="padding: 16px 32px;font-size: 16px;">
         Refresh data
@@ -21,7 +27,7 @@ draft: false
 <!--  CUSTOM SCRIPTS  -->
 
 
-<script src="/js/plotly-2.29.1.min.js" charset="utf-8"></script>
+<script src={{< mybaseurl "js/plotly-2.29.1.min.js" >}} charset="utf-8"></script>
 
 <script id="init">
     // Code to run on page load
@@ -197,10 +203,9 @@ draft: false
     }
 
     
-    // load_text_data("https://storage.cloud.google.com/js-miniproj-413314/time_series.csv")
-    
-    load_json_data("/plot_data.json")
-    .then(plot_all_json_data)
+    // load_json_data("/plot_data.json")  // Works only locally
+    load_json_data({{< mybaseurl "plot_data.json" >}})
+        .then(plot_all_json_data)
 
 
 
