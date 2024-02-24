@@ -9,20 +9,57 @@ draft: false
 </head>
 
 <body>
-    <div><p id="statusMessage" style="color: chocolate;"></p></div>
 
-    <!-- <p id="TEST">   </p> -->
+    <p>Current situation as of <b>Jan 16, 2024</b></p>
 
-    <button id="refreshButton" class="btn cstyle interactive primary" 
-    style="padding: 16px 32px;font-size: 16px;">
-        Refresh data
-    </button>
+    <div id="scalarReportsTableDiv" style="display: block">
+        <h2>Reported events</h2>
 
-    <div id="weeklyPlots" style="text-align: center; height: 500px"></div>
-    <div id="dailyPlots" style="text-align: center; height: 500px"></div>
-    <div id="testPlot" style="text-align: center; height: 500px"></div>
+        <table id="scalarReportsTable">
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Counts</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Hospitalizations</td>
+                    <td>23</td>
+                </tr>
+                <tr>
+                    <td>Deaths</td>
+                    <td>2</td>
+                </tr>
+            </tbody>
+          </table> 
+    
+    </div>
+    
+    <div id="plotsMainDiv" style="display: block">
+        <h2>Visualizations</h2>
 
+        <!-- Message line for website errors -->
+        <div><p id="statusMessage" style="color: chocolate;"></p></div>
 
+        <!-- <p id="TEST">   </p> -->
+
+        <button id="refreshButton" class="btn cstyle interactive primary" 
+        style="padding: 16px 32px;font-size: 16px;">
+            Refresh data
+        </button>
+
+        <!-- PLOT DIVS -->
+        <div id="weeklyPlots" style="text-align: center; height: 500px; display: block">
+            <h3>Weekly Time Series</h3>
+        </div>
+        <div id="dailyPlots" style="text-align: center; height: 500px; display: block">
+            <h3>Daily Time Series</h3>
+            <!-- <div id="dailyPlots"></div> -->
+        </div>
+        <div id="testPlot" style="text-align: center; height: 500px"></div>
+
+    </div>
 <!-- ======================================== -->
 <!--  CUSTOM SCRIPTS  -->
 
@@ -92,6 +129,7 @@ draft: false
         };
 
         var plotlyLayout = {
+            showlegend: true,
             legend: {
                 x: 0.02,
                 xanchor: 'left',
@@ -102,7 +140,7 @@ draft: false
                 // size: 18,
                 color: '#808080'
             },
-            margin: { t: 50, b: 50, l: 50, r: 50 },
+            margin: { t: 100, b: 50, l: 50, r: 50 },
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
             colorway : ['#7dc903', '#282828', '#3f6502', '#a8a8a8']
@@ -124,7 +162,7 @@ draft: false
         // Create an inherited layout for the weekly plots
         var weeklyLayout = {
             ...plotlyLayout,
-            title: 'Weekly Data',
+            // title: 'Weekly Time Series',
             // xaxis:{gridcolor: '#80808040'},
             yaxis:{gridcolor: '#80808040'},
         }; 
@@ -154,7 +192,7 @@ draft: false
         // Create an inherited layout for the daily plots
         var dailyLayout = {
             ...plotlyLayout,
-            title: 'Daily Data',
+            // title: 'Daily Time Series',
             xaxis:{gridcolor: '#80808040'},
             yaxis:{gridcolor: '#80808040'}
         };

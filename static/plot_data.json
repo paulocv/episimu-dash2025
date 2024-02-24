@@ -29,7 +29,8 @@
             2127
         ],
         "type": "bar",
-        "name": "Symptomatic"
+        "name": "Symptomatic",
+        "visible": true
     },
     "weekly_hosp_data": {
         "x": [
