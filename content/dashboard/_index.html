@@ -63,7 +63,7 @@ draft: false
 <!--  CUSTOM SCRIPTS  -->
 
 
-<script src={{< mybaseurl "js/plotly-2.29.1.min.js" >}} charset="utf-8"></script>
+<script src='{{< mybaseurl "js/plotly-2.29.1.min.js" >}}' charset="utf-8"></script>
 
 <script id="init">
     // Code to run on page load
@@ -82,7 +82,10 @@ draft: false
         
         let response;
         try {
-            response = await fetch(_url, {cache: "reload"});
+            // response = await fetch(_url, {cache: "reload"});   // Do not check cache but update it
+            // response = await fetch(_url, {cache: "no-store"});   // Do not check cache, does not cache it
+            // response = await fetch(_url, {cache: "no-cache"});   // Check cache, then make a conditional request
+            response = await fetch(_url, {cache: "default"});   // If stale, revalidate with server
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -208,9 +211,13 @@ draft: false
         console.groupEnd()
     }
 
-    
+    // -()- From website files
+    let url = "{{% mybaseurl plot_data.json %}}";
+    // // -()- From Google Cloud
+    // let url = "https://storage.googleapis.com/js-miniproj-413314/dashboard_data.json";
+
     // load_json_data("/plot_data.json")  // Works only locally
-    load_json_data({{< mybaseurl "plot_data.json" >}})
+    load_json_data(url)
         .then(plot_all_json_data)
 
 
