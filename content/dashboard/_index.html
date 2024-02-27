@@ -9,8 +9,11 @@ draft: false
 </head>
 
 <body>
+    <p style="text-align: center; background-color: lightcoral;"><i>
+        Notice: this page is a development preview. The data may be inconsistent.
+    </i></p>
 
-    <p>Current situation as of <b>Jan 16, 2024</b></p>
+    <p>Current situation as of <b>Jan 23, 2024</b></p>
 
     <div id="scalarReportsTableDiv" style="display: block">
         <h2>Reported events</h2>
@@ -44,10 +47,10 @@ draft: false
 
         <!-- <p id="TEST">   </p> -->
 
-        <button id="refreshButton" class="btn cstyle interactive primary" 
+        <!-- <button id="refreshButton" class="btn cstyle interactive primary" 
         style="padding: 16px 32px;font-size: 16px;">
             Refresh data
-        </button>
+        </button> -->
 
         <!-- PLOT DIVS -->
         <div id="weeklyPlots" style="text-align: center; height: 500px; display: block">
@@ -56,6 +59,9 @@ draft: false
         <div id="dailyPlots" style="text-align: center; height: 500px; display: block">
             <h3>Daily Time Series</h3>
             <!-- <div id="dailyPlots"></div> -->
+        </div>
+        <div id="houseHistPlots" style="text-align: center; height: 500px; display: block">
+            <h3>Household histograms</h3>
         </div>
 
     </div>
@@ -206,6 +212,28 @@ draft: false
             plotlyConfig
         );
         console.log("Daily plots done")
+
+        // ============================
+        // Histograms
+        // ============================
+
+        var houseHistPlots = document.getElementById("houseHistPlots");
+
+        // Create an inherited layout for the house plots
+        var houseLayout = {
+            ...plotlyLayout,
+            // title: 'House Time Series',
+            // xaxis:{gridcolor: '#80808040'},
+            yaxis:{gridcolor: '#80808040'}
+        };
+        
+        Plotly.newPlot(
+            houseHistPlots,
+            [data_obj.house_rate_hist],
+            houseLayout,
+            plotlyConfig
+        )
+        console.log("House plots done")
 
         console.log("Plot done")
         console.groupEnd()
