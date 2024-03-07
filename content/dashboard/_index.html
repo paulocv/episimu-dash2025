@@ -15,6 +15,8 @@ draft: false
 
     <p>Current situation as of <b>Jan 23, 2024</b></p>
 
+    <div id="textDashboard" style="display: block"><i>[Nothing on the text dashboard]</i></div>
+
     <div id="scalarReportsTableDiv" style="display: block">
         <h2>Reported events</h2>
 
@@ -104,8 +106,8 @@ draft: false
         try {
             // response = await fetch(_url, {cache: "reload"});   // Do not check cache but update it
             // response = await fetch(_url, {cache: "no-store"});   // Do not check cache, does not cache it
-            // response = await fetch(_url, {cache: "no-cache"});   // Check cache, then make a conditional request
-            response = await fetch(_url, {cache: "default"});   // If stale, revalidate with server
+            response = await fetch(_url, {cache: "no-cache"});   // Check cache, then make a conditional request
+            // response = await fetch(_url, {cache: "default"});   // If stale, revalidate with server – FAILS IN CHROME!!
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -251,6 +253,15 @@ draft: false
 
         console.log("Plot done")
         console.groupEnd()
+
+
+        // ===================
+        // TESTTTTTTTTTTTTTTTT TODO A SIMPLE HTML DASHBOARD
+        // ===================
+        if ('html_text' in data_obj){
+            console.log("Updating text dashboard")
+            document.getElementById("textDashboard").innerHTML = data_obj.html_text
+        }
     }
 
     // -()- From website files
