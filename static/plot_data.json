@@ -53,9 +53,9 @@
         "y": [
             0,
             0,
-            2,
             0,
-            5,
+            0,
+            3,
             0
         ],
         "type": "bar",
@@ -304,18 +304,18 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             2,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            4,
             0,
             1,
             0,
@@ -346,5 +346,5 @@
         "name": "Hospitalizations in the same household",
         "visible": true
     },
-    "html_text": "\n    <h2>News</h2>\n    <p>\n    <li>The first case was detected on 2024-01-01</li>\n    </p>\n    "
+    "news_feed_html": "\n    <!-- <h2>News feed</h2> -->\n    <p>\n    <li>The first case was detected on 2024-01-01</li>\n    </p>\n    "
 }

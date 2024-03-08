@@ -15,7 +15,12 @@ draft: false
 
     <p>Current situation as of <b>Jan 23, 2024</b></p>
 
-    <div id="textDashboard" style="display: block"><i>[Nothing on the text dashboard]</i></div>
+    <div id="textDashboard" style="display: block">
+        <h2>News feed</h2>
+        <div id="newsFeed">
+            <i>[Nothing to show in the news feed]</i>
+        </div>
+    </div>
 
     <div id="scalarReportsTableDiv" style="display: block">
         <h2>Reported events</h2>
@@ -84,39 +89,24 @@ draft: false
 
 <!-- ======================================== -->
 
-
+<!-- Plotly -->
 <script src='{{< mybaseurl "js/plotly-2.29.1.min.js" >}}' charset="utf-8"></script>
+
+<!-- My custrom scripts -->
+<script src='{{< mybaseurl "js/visibility.js" >}}'></script>
 
 <script id="init">
     // Code to run on page load
 
-    console.log("Hello, World!");
+    console.log("Running the init script");
 
 
     // ==========================================
     // TEST - SHOW/HIDE STUFF
     // ==========================================
-
-    function toggleElementVisibility(elementId) {
-        var x = document.getElementById(elementId);
-        if (x.style.display === "none") {
-            x.style.display = "block";
-        } else {
-            x.style.display = "none";
-        }
-    }
-
-    function hideElement(elementId) {
-        let x = document.getElementById(elementId);
-        x.style.display = "none";
-        console.log("Hidden element: ", elementId)
-    }
-
-    function showElement(elementId) {
-        let x = document.getElementById(elementId);
-        x.style.display = "block";
-        console.log("Displayed element: ", elementId)
-    }
+   
+    // function toggleElementVisibility(elementId) {
+    //     .... // // sent to `visibility.js`
 
     // // Test the functions
     // hideElement("weeklyPlots")
@@ -303,10 +293,21 @@ draft: false
         // ===================
         // TESTTTTTTTTTTTTTTTT TODO A SIMPLE HTML DASHBOARD
         // ===================
-        if ('html_text' in data_obj){
-            console.log("Updating text dashboard")
-            document.getElementById("textDashboard").innerHTML = data_obj.html_text
+        // if ('html_text' in data_obj){
+        //     console.log("Updating text dashboard")
+        //     document.getElementById("newsFeed").innerHTML = data_obj.html_text
+        // }
+
+        return data_obj
+    }
+
+    function update_news_feed(data_obj) {
+        if ('news_feed_html' in data_obj){
+            console.log("Updating the news feed")
+            document.getElementById("newsFeed").innerHTML = data_obj.news_feed_html
         }
+
+        return data_obj
     }
 
     // -()- From website files
@@ -317,6 +318,7 @@ draft: false
     // load_json_data("/plot_data.json")  // Works only locally
     load_json_data(url)
         .then(plot_all_json_data)
+        .then(update_news_feed)
 
 
 
