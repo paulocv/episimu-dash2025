@@ -93,6 +93,36 @@ draft: false
     console.log("Hello, World!");
 
 
+    // ==========================================
+    // TEST - SHOW/HIDE STUFF
+    // ==========================================
+
+    function toggleElementVisibility(elementId) {
+        var x = document.getElementById(elementId);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+
+    function hideElement(elementId) {
+        let x = document.getElementById(elementId);
+        x.style.display = "none";
+        console.log("Hidden element: ", elementId)
+    }
+
+    function showElement(elementId) {
+        let x = document.getElementById(elementId);
+        x.style.display = "block";
+        console.log("Displayed element: ", elementId)
+    }
+
+    // // Test the functions
+    // hideElement("weeklyPlots")
+    // hideElement("dailyPlots")
+    // hideElement("houseHistPlots")
+    // showElement("weeklyPlots")
 
     // ============================================
     // ATTEMPT TO FETCH DATA FROM GCLOUD
@@ -150,6 +180,14 @@ draft: false
         var plotlyConfig = {
             responsive: true,
             modeBarButtonsToRemove: ["select2d", "lasso2d"],
+            displayModeBar: true,  // Always show bar of buttons
+              toImageButtonOptions: {
+                format: 'svg', // one of png, svg, jpeg, webp
+                filename: 'dashboard_plot',
+                // height: 500,
+                // width: 700,
+                // scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+            }
         };
 
         var plotlyLayout = {
@@ -157,7 +195,9 @@ draft: false
             legend: {
                 x: 0.02,
                 xanchor: 'left',
-                y: 1
+                y: 1,
+                itemclick: "toggleothers",  // Hide other plots when clicked
+                itemdoubleclick: "toggle"   // Hide self when double-clicked
             },
                 font: {
                 // family: 'Courier New, monospace',
@@ -254,6 +294,11 @@ draft: false
         console.log("Plot done")
         console.groupEnd()
 
+
+        // =======================
+        // TESTTTTTTTTT PIE CHART
+        // =======================
+        
 
         // ===================
         // TESTTTTTTTTTTTTTTTT TODO A SIMPLE HTML DASHBOARD
