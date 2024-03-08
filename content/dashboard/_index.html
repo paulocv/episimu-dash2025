@@ -13,17 +13,23 @@ draft: false
         Notice: this page is a development preview. The data may be inconsistent.
     </i></p>
 
-    <p>Current situation as of <b>Jan 23, 2024</b></p>
+    <p>Current situation as of <b>Feb 07, 2024</b></p>
 
     <div id="textDashboard" style="display: block">
         <h2>News feed</h2>
-        <div id="newsFeed">
-            <i>[Nothing to show in the news feed]</i>
+        {{< tabs title="" >}}
+        {{< tab title="News" >}}
+        <div id="newsFeedContent">
+            <i>[There is nothing to show in the news feed, or the data is still loading.]</i>
         </div>
+        <!-- <p> [<i>2024-01-05</i>] Test something here</p> -->
+        {{< /tab >}}
+        {{< /tabs >}}
+
     </div>
 
     <div id="scalarReportsTableDiv" style="display: block">
-        <h2>Reported events</h2>
+        <!-- <h2>Reported events</h2> -->
 
         <table id="scalarReportsTable">
             <thead>
@@ -157,9 +163,9 @@ draft: false
     }
 
 
-    // ---------------------------------------------------
+    // =================================================
     // PLOTLY
-    // ---------------------------------------------------
+    // =================================================
 
     async function plot_all_json_data(data_obj){
         console.group("plot_all_json_data")
@@ -290,21 +296,13 @@ draft: false
         // =======================
         
 
-        // ===================
-        // TESTTTTTTTTTTTTTTTT TODO A SIMPLE HTML DASHBOARD
-        // ===================
-        // if ('html_text' in data_obj){
-        //     console.log("Updating text dashboard")
-        //     document.getElementById("newsFeed").innerHTML = data_obj.html_text
-        // }
-
         return data_obj
     }
 
-    function update_news_feed(data_obj) {
+    async function update_news_feed(data_obj) {
         if ('news_feed_html' in data_obj){
             console.log("Updating the news feed")
-            document.getElementById("newsFeed").innerHTML = data_obj.news_feed_html
+            document.getElementById("newsFeedContent").innerHTML = data_obj.news_feed_html
         }
 
         return data_obj
@@ -317,8 +315,9 @@ draft: false
 
     // load_json_data("/plot_data.json")  // Works only locally
     load_json_data(url)
-        .then(plot_all_json_data)
         .then(update_news_feed)
+        .then(plot_all_json_data)
+        
 
 
 
