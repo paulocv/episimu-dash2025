@@ -67,7 +67,8 @@ draft: false
 
         <!-- PLOT DIVS -->
 
-        <div id="weeklyPlotsTab" style="text-align: center;display: block">
+        <!-- Using tabs shortcode –PROBLEM: plots on other tabs do not size properly!  -->
+        <!-- <div id="weeklyPlotsTab" style="text-align: center;display: block">
             <h3>Weekly Time Series</h3>
             
             {{< tabs title="" >}}
@@ -83,7 +84,12 @@ draft: false
 
             {{< /tabs >}}
             
-        </div>  <!-- weeklyPlots -->
+        </div> -->
+
+        <div id="weeklyPlotsTab" style="text-align: center;display: block">
+            <h3>Weekly Time Series</h3>
+            <div id="weeklyPlots" style="height: 500px;""></div>
+        </div>  <!-- weeklyPlotsTab -->
 
 
         <div id="dailyPlots" style="text-align: center; height: 500px; display: block">
@@ -208,7 +214,13 @@ draft: false
                 xanchor: 'left',
                 y: 1,
                 itemclick: "toggleothers",  // Hide other plots when clicked
-                itemdoubleclick: "toggle"   // Hide self when double-clicked
+                orientation: "v",
+                // font: {
+                //     family: 'sans-serif',
+                //     size: 12,
+                //     color: '#000'
+                // },
+                itemdoubleclick: false   // Hide self when double-clicked
             },
                 font: {
                 // family: 'Courier New, monospace',
@@ -253,33 +265,34 @@ draft: false
         )
         console.log("Weekly incidence plots done")
 
-        // ============================
-        // Weekly Plots – Cumulative
-        // ============================
-        var weeklyPlotsCumulative = document.getElementById("weeklyPlotsCumulative");
+        // // ============================
+        // // Weekly Plots – Cumulative
+        // // ============================
+        // // CURRENTLY, this does not play well with the `tab(s)` shortcode
+        // var weeklyPlotsCumulative = document.getElementById("weeklyPlotsCumulative");
 
-        // Get elements of `data_obj` that start with "weekly_", push each one into an array
-        const weeklyDataCumulative = Object
-            .keys(data_obj)
-            .filter(key => key.startsWith("cumulative_weekly_"))
-            .map(key => data_obj[key]);
-        console.log("weeklyDataCumulative = ", weeklyDataCumulative);
+        // // Get elements of `data_obj` that start with "weekly_", push each one into an array
+        // const weeklyDataCumulative = Object
+        //     .keys(data_obj)
+        //     .filter(key => key.startsWith("cumulative_weekly_"))
+        //     .map(key => data_obj[key]);
+        // console.log("weeklyDataCumulative = ", weeklyDataCumulative);
 
-        // Create an inherited layout for the weekly plots
-        var weeklyLayoutCumulative = {
-            ...plotlyLayout,
-            // title: 'Weekly Time Series',
-            // xaxis:{gridcolor: '#80808040'},
-            yaxis:{gridcolor: '#80808040', title: "Cumulative Incidence",},
-        }; 
+        // // Create an inherited layout for the weekly plots
+        // var weeklyLayoutCumulative = {
+        //     ...plotlyLayout,
+        //     // title: 'Weekly Time Series',
+        //     // xaxis:{gridcolor: '#80808040'},
+        //     yaxis:{gridcolor: '#80808040', title: "Cumulative Incidence",},
+        // };
 
-        Plotly.newPlot(
-            weeklyPlotsCumulative,
-            weeklyDataCumulative,
-            weeklyLayoutCumulative,
-            plotlyConfig
-        )
-        console.log("Weekly cumulative plots done")
+        // Plotly.newPlot(
+        //     weeklyPlotsCumulative,
+        //     weeklyDataCumulative,
+        //     weeklyLayoutCumulative,
+        //     plotlyConfig
+        // )
+        // console.log("Weekly cumulative plots done")
 
 
         // ============================
@@ -322,7 +335,13 @@ draft: false
             ...plotlyLayout,
             // title: 'House Time Series',
             // xaxis:{gridcolor: '#80808040'},
-            yaxis:{gridcolor: '#80808040'}
+            yaxis:{gridcolor: '#80808040'},
+            legend: {
+                ...plotlyLayout.legend,
+                x: 1,
+                y: 1,
+                xanchor: 'right'
+            }
         };
         
         Plotly.newPlot(
