@@ -18,7 +18,7 @@ draft: false
     <div id="textDashboard" style="display: block">
         <h2>News feed</h2>
         {{< tabs title="" >}}
-        {{< tab title="News" >}}
+        {{< tab title="Log" >}}
         <div id="newsFeedContent">
             <i>[There is nothing to show in the news feed, or the data is still loading.]</i>
         </div>
@@ -66,9 +66,26 @@ draft: false
         </button> -->
 
         <!-- PLOT DIVS -->
-        <div id="weeklyPlots" style="text-align: center; height: 500px; display: block">
+
+        <div id="weeklyPlotsTab" style="text-align: center;">
             <h3>Weekly Time Series</h3>
-        </div>
+            
+            {{< tabs title="" >}}
+            
+            {{< tab title="Incidence" >}}
+            <div id="weeklyPlots" style="height: 500px; display: block"></div>
+            {{< /tab >}}
+
+            {{< tab title="Cumulative" >}}
+            <div id="weeklyPlotsCumulative" style="height: 500px; display: block"></div>
+            {{< /tab >}}
+
+
+            {{< /tabs >}}
+            
+        </div>  <!-- weeklyPlots -->
+
+
         <div id="dailyPlots" style="text-align: center; height: 500px; display: block">
             <h3>Daily Time Series</h3>
             <!-- <div id="dailyPlots"></div> -->
@@ -115,10 +132,8 @@ draft: false
     //     .... // // sent to `visibility.js`
 
     // // Test the functions
-    // hideElement("weeklyPlots")
-    // hideElement("dailyPlots")
-    // hideElement("houseHistPlots")
-    // showElement("weeklyPlots")
+    // hideElement("weeklyPlotsTab")
+    // showElement("weeklyPlotsTab")
 
     // ============================================
     // ATTEMPT TO FETCH DATA FROM GCLOUD
