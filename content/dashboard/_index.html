@@ -67,17 +67,17 @@ draft: false
 
         <!-- PLOT DIVS -->
 
-        <div id="weeklyPlotsTab" style="text-align: center;">
+        <div id="weeklyPlotsTab" style="text-align: center;display: block">
             <h3>Weekly Time Series</h3>
             
             {{< tabs title="" >}}
             
             {{< tab title="Incidence" >}}
-            <div id="weeklyPlots" style="height: 500px; display: block"></div>
+            <div id="weeklyPlots" style="height: 500px;""></div>
             {{< /tab >}}
 
             {{< tab title="Cumulative" >}}
-            <div id="weeklyPlotsCumulative" style="height: 500px; display: block"></div>
+            <div id="weeklyPlotsCumulative" style="height: 500px;"></div>
             {{< /tab >}}
 
 
@@ -223,7 +223,7 @@ draft: false
 
 
         // ============================
-        // Weekly Plots
+        // Weekly Plots – Incidence
         // ============================
         var weeklyPlots = document.getElementById("weeklyPlots");
 
@@ -239,7 +239,10 @@ draft: false
             ...plotlyLayout,
             // title: 'Weekly Time Series',
             // xaxis:{gridcolor: '#80808040'},
-            yaxis:{gridcolor: '#80808040'},
+            yaxis:{
+                gridcolor: '#80808040',
+                title: "Incidence",
+            },
         }; 
 
         Plotly.newPlot(
@@ -248,7 +251,35 @@ draft: false
             weeklyLayout,
             plotlyConfig
         )
-        console.log("Weekly plots done")
+        console.log("Weekly incidence plots done")
+
+        // ============================
+        // Weekly Plots – Cumulative
+        // ============================
+        var weeklyPlotsCumulative = document.getElementById("weeklyPlotsCumulative");
+
+        // Get elements of `data_obj` that start with "weekly_", push each one into an array
+        const weeklyDataCumulative = Object
+            .keys(data_obj)
+            .filter(key => key.startsWith("cumulative_weekly_"))
+            .map(key => data_obj[key]);
+        console.log("weeklyDataCumulative = ", weeklyDataCumulative);
+
+        // Create an inherited layout for the weekly plots
+        var weeklyLayoutCumulative = {
+            ...plotlyLayout,
+            // title: 'Weekly Time Series',
+            // xaxis:{gridcolor: '#80808040'},
+            yaxis:{gridcolor: '#80808040', title: "Cumulative Incidence",},
+        }; 
+
+        Plotly.newPlot(
+            weeklyPlotsCumulative,
+            weeklyDataCumulative,
+            weeklyLayoutCumulative,
+            plotlyConfig
+        )
+        console.log("Weekly cumulative plots done")
 
 
         // ============================

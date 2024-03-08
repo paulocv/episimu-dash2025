@@ -18,7 +18,28 @@
         ],
         "type": "bar",
         "name": "Symptomatic",
-        "visible": false
+        "visible": true
+    },
+    "cumulative_weekly_sympt_data": {
+        "x": [
+            "2024-01-01",
+            "2024-01-08",
+            "2024-01-15",
+            "2024-01-22",
+            "2024-01-29",
+            "2024-02-05"
+        ],
+        "y": [
+            9,
+            18,
+            33,
+            71,
+            125,
+            204
+        ],
+        "type": "bar",
+        "name": "Symptomatic",
+        "visible": true
     },
     "weekly_hosp_data": {
         "x": [
@@ -153,7 +174,7 @@
         ],
         "type": "scatter",
         "name": "Symptomatic",
-        "visible": false
+        "visible": true
     },
     "daily_hosp_data": {
         "x": [
@@ -346,5 +367,5 @@
         "name": "Hospitalizations in the same household",
         "visible": true
     },
-    "news_feed_html": "\n    <!-- <h2>News feed</h2> -->\n    <p>\n    <li>The first case was detected on 2024-01-01</li>\n    </p>\n    "
+    "news_feed_html": "\n    \n    <p> [<i>2024-01-05</i>] The first case was detected on 2024-01-01.</p>\n    <p> [<i>2024-01-08</i>] The first death due to the diseasewas reported on 2024-01-29.</p>\n    \n    "
 }
