@@ -3,13 +3,16 @@ languageCode = 'en-us'
 title = 'EpiSimu 2024'
 theme = 'relearn'
 [params]
-# # Complete theme specification, with custom names
-[[params.themeVariant]]
-    identifier = 'relearn-light'
-    name = 'Light theme'
-# [[params.themeVariant]]
-#     identifier = 'relearn-dark'
-#     name = 'Dark theme'
 
-# # Simple theme specification
-# themeVariant = ["relearn-light", "relearn-dark", ]
+  disableSearch = true
+
+  # # Complete theme specification, with custom names
+  [[params.themeVariant]]
+      identifier = 'relearn-light'
+      name = 'Light theme'
+  # [[params.themeVariant]]
+  #     identifier = 'relearn-dark'
+  #     name = 'Dark theme'
+
+  # # Simple theme specification
+  # themeVariant = ["relearn-light", "relearn-dark", ]
