@@ -13,7 +13,7 @@ draft: false
         Notice: this page is a development preview. The data may be inconsistent.
     </i></p>
 
-    <p>Current situation as of <b>Feb 07, 2024</b></p>
+    <p>Current situation as of <b id="currentDateField">[Date unknown]</b>.</p>
 
     <div id="textDashboard" style="display: block">
         <h2>News feed</h2>
@@ -143,6 +143,7 @@ draft: false
     // hideElement("weeklyPlotsTab")
     // showElement("weeklyPlotsTab")
 
+
     // ============================================
     // ATTEMPT TO FETCH DATA FROM GCLOUD
     // ============================================
@@ -183,6 +184,17 @@ draft: false
         console.groupEnd();
         
         return obj;
+    }
+
+    // ===================================================
+    // Update currrent date
+    // ===================================================
+
+    async function update_current_date(data_obj){
+        if ('current_date' in data_obj){
+            document.getElementById("currentDateField").innerHTML = data_obj.current_date
+        }
+        return data_obj;
     }
 
 
@@ -382,6 +394,7 @@ draft: false
 
     // load_json_data("/plot_data.json")  // Works only locally
     load_json_data(url)
+        .then(update_current_date)
         .then(update_news_feed)
         .then(plot_all_json_data)
         
