@@ -13,7 +13,11 @@ draft: false
         Notice: this page is a development preview. The data may be inconsistent.
     </i></p>
 
-    <p>Current situation as of <b id="currentDateField">[Date unknown]</b>.</p>
+    <!-- Message line for website errors -->
+    <div><p id="statusMessage" style="color: chocolate;"></p></div>
+
+    <!--- Current date line -->
+    <p id="currentDateLine">Current situation as of <b id="currentDateField">[Date unknown]</b>.</p>
 
     <div id="textDashboard" style="display: block">
         <h2>News feed</h2>
@@ -55,9 +59,6 @@ draft: false
     <div id="plotsMainDiv" style="display: block">
         <h2>Visualizations</h2>
 
-        <!-- Message line for website errors -->
-        <div><p id="statusMessage" style="color: chocolate;"></p></div>
-
         <!-- <p id="TEST">   </p> -->
 
         <!-- <button id="refreshButton" class="btn cstyle interactive primary" 
@@ -86,18 +87,18 @@ draft: false
             
         </div> -->
 
-        <div id="weeklyPlotsTab" style="text-align: center;display: block">
+        <div id="weeklyPlotsTab" style="text-align: center;display: none">
             <h3>Weekly Time Series</h3>
             <div id="weeklyPlots" style="height: 500px;"></div>
         </div>  <!-- weeklyPlotsTab -->
         
         
-        <div id="dailyPlotsTab" style="text-align: center; display: block">
+        <div id="dailyPlotsTab" style="text-align: center; display: none">
             <h3>Daily Time Series</h3>
             <div id="dailyPlots" style="height: 500px;"></div>
         </div>
 
-        <div id="houseHistPlotsTab" style="text-align: center; display: block">
+        <div id="houseHistPlotsTab" style="text-align: center; display: none">
             <h3>Household histograms</h3>
             <div id="houseHistPlots" style="height: 500px;"></div>
         </div>
@@ -260,24 +261,36 @@ draft: false
             .map(key => data_obj[key]);
         console.log("weeklyData = ", weeklyData);
 
-        // Create an inherited layout for the weekly plots
-        var weeklyLayout = {
-            ...plotlyLayout,
-            // title: 'Weekly Time Series',
-            // xaxis:{gridcolor: '#80808040'},
-            yaxis:{
-                gridcolor: '#80808040',
-                title: "Incidence",
-            },
-        }; 
+        // Plot conditioned to having data
+        if (weeklyData.length > 0){
+            // Make sure the tab is visible
+            document.getElementById("weeklyPlotsTab").style.display = "block";
 
-        Plotly.newPlot(
-            weeklyPlots,
-            weeklyData,
-            weeklyLayout,
-            plotlyConfig
-        )
-        console.log("Weekly incidence plots done")
+            // Create an inherited layout for the weekly plots
+            var weeklyLayout = {
+                ...plotlyLayout,
+                // title: 'Weekly Time Series',
+                // xaxis:{gridcolor: '#80808040'},
+                yaxis:{
+                    gridcolor: '#80808040',
+                    title: "Incidence",
+                },
+            }; 
+
+            Plotly.newPlot(
+                weeklyPlots,
+                weeklyData,
+                weeklyLayout,
+                plotlyConfig
+            )
+            console.log("Weekly incidence plots done")
+        }
+        else{
+            // Hide the tab and proceed without plotting
+            document.getElementById("weeklyPlotsTab").style.display = "none";
+            console.log("No weekly data to plot")
+        }
+
 
         // // ============================
         // // Weekly Plots – Cumulative
@@ -322,21 +335,34 @@ draft: false
             .map(key => data_obj[key]);
         console.log("dailyData = ", dailyData);
 
-        // Create an inherited layout for the daily plots
-        var dailyLayout = {
-            ...plotlyLayout,
-            // title: 'Daily Time Series',
-            xaxis:{gridcolor: '#80808040'},
-            yaxis:{gridcolor: '#80808040'}
-        };
+        // Plot conditioned to having data
+        if (dailyData.length > 0){
+            // Make sure the tab is visible
+            document.getElementById("dailyPlotsTab").style.display = "block";
 
-        Plotly.newPlot(
-            dailyPlots,
-            dailyData,
-            dailyLayout,
-            plotlyConfig
-        );
-        console.log("Daily plots done")
+            // Create an inherited layout for the daily plots
+            var dailyLayout = {
+                ...plotlyLayout,
+                // title: 'Daily Time Series',
+                xaxis:{gridcolor: '#80808040'},
+                yaxis:{gridcolor: '#80808040'}
+            };
+
+            Plotly.newPlot(
+                dailyPlots,
+                dailyData,
+                dailyLayout,
+                plotlyConfig
+            );
+            console.log("Daily plots done")
+        }
+        else{
+            // Hide the tab and proceed without plotting
+            document.getElementById("dailyPlotsTab").style.display = "none";
+            console.log("No daily data to plot")
+        }
+
+        
 
         // ============================
         // Histograms
@@ -344,27 +370,40 @@ draft: false
 
         var houseHistPlots = document.getElementById("houseHistPlots");
 
-        // Create an inherited layout for the house plots
-        var houseLayout = {
-            ...plotlyLayout,
-            // title: 'House Time Series',
-            // xaxis:{gridcolor: '#80808040'},
-            yaxis:{gridcolor: '#80808040'},
-            legend: {
-                ...plotlyLayout.legend,
-                x: 1,
-                y: 1,
-                xanchor: 'right'
-            }
-        };
-        
-        Plotly.newPlot(
-            houseHistPlots,
-            [data_obj.house_rate_hist],
-            houseLayout,
-            plotlyConfig
-        )
-        console.log("House plots done")
+        // Plot conditioned to having data
+        if ('house_rate_hist' in data_obj){
+            // Make sure the tab is visible
+            document.getElementById("houseHistPlotsTab").style.display = "block";
+            
+            // Create an inherited layout for the house plots
+            var houseLayout = {
+                ...plotlyLayout,
+                // title: 'House Time Series',
+                // xaxis:{gridcolor: '#80808040'},
+                yaxis:{gridcolor: '#80808040'},
+                legend: {
+                    ...plotlyLayout.legend,
+                    x: 1,
+                    y: 1,
+                    xanchor: 'right'
+                }
+            };
+            
+            // Plot command
+            Plotly.newPlot(
+                houseHistPlots,
+                [data_obj.house_rate_hist],
+                houseLayout,
+                plotlyConfig
+            )
+            console.log("House plots done")
+
+        }
+        else{
+            // Hide the tab and proceed without plotting
+            document.getElementById("houseHistPlotsTab").style.display = "none";
+            console.log("No household data to plot")
+        }
 
         console.log("Plot done")
         console.groupEnd()
