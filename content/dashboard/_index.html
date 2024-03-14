@@ -19,7 +19,7 @@ draft: false
     <!--- Current date line -->
     <p id="currentDateLine">Current situation as of <b id="currentDateField">[Date unknown]</b>.</p>
 
-    <div id="textDashboard" style="display: block">
+    <div id="newsFeedDiv" style="display: block">
         <h2>News feed</h2>
         {{< tabs title="" >}}
         {{< tab title="Log" >}}
@@ -31,31 +31,34 @@ draft: false
         {{< /tabs >}}
 
     </div>
-
+    
+    <!-- Table of events (scalar reports) -->
     <div id="scalarReportsTableDiv" style="display: block">
         <!-- <h2>Reported events</h2> -->
+        <h4>Total numbers of reported events</h4>
 
         <table id="scalarReportsTable">
-            <thead>
-                <tr>
-                    <th>Event</th>
-                    <th>Counts</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Hospitalizations</td>
-                    <td>23</td>
-                </tr>
-                <tr>
-                    <td>Deaths</td>
-                    <td>2</td>
-                </tr>
-            </tbody>
-          </table> 
+            <!-- Constructed dynamically in -->
+        </table> 
     
     </div>
+
+    <!-- Table of symptoms -->
+    <div id="symptomsTableDiv" style="display: block">
+        <h4>Reported Symptoms</h4>
+        <table id="symptomsTable"></table>
+    </div>
+
     
+    
+    <!-- Table of disease lab tests -->
+    <div id="diseasesTableDiv" style="display: block">
+        <h4>Diseases: Lab Tests</h4>
+        <table id="diseasesTable"></table>
+    </div>
+
+
+    <!--- Visualizations (Plots) -->
     <div id="plotsMainDiv" style="display: block">
         <h2>Visualizations</h2>
 
@@ -105,11 +108,19 @@ draft: false
 
     </div>
 
-    <div id="lineList" style="display: block;">
+    <!-- Line list links-->
+    <div id="lineListDiv" style="display: block;">
         <h2>Line list</h2>
 
+        <!-- From local site files -->
         <p><a href='{{< mybaseurl "individuals.csv" >}}'>Dowload line list as CSV </a></p>
         <p><a href='{{< mybaseurl "individuals.html" >}}'>View line list as HTML </a> </p>
+
+        <!-- From Gcloud -->
+        <!-- <p><a href='https://storage.googleapis.com/js-miniproj-413314/individuals.csv'>Dowload line list as CSV </a></p>
+        <p><a href='https://storage.googleapis.com/js-miniproj-413314/individuals.html'>View line list as HTML </a> </p> -->
+
+
     </div>
 
 
@@ -133,16 +144,20 @@ draft: false
     console.log("Running the init script");
 
 
-    // ==========================================
-    // TEST - SHOW/HIDE STUFF
-    // ==========================================
-   
-    // function toggleElementVisibility(elementId) {
-    //     .... // // sent to `visibility.js`
+    // -()- From website files
+    let url = "{{% mybaseurl dashboard_data.json %}}";
+    // // -()- From Google Cloud
+    // let url = "https://storage.googleapis.com/js-miniproj-413314/dashboard_data.json";
 
-    // // Test the functions
-    // hideElement("weeklyPlotsTab")
-    // showElement("weeklyPlotsTab")
+    // load_json_data("/plot_data.json")  // Works only locally
+    load_json_data(url)
+        .then(update_current_date)
+        .then(update_news_feed)
+        .then(make_table_of_events)
+        .then(make_table_of_symptoms)
+        .then(make_table_of_diseases)
+        .then(plot_all_json_data)
+        .then(reveal_html_elements)
 
 
     // ============================================
@@ -150,7 +165,7 @@ draft: false
     // ============================================
 
     async function load_json_data(_url){
-        console.group("load_json_data")
+        console.groupCollapsed("load_json_data")
         console.log(`Fetching data from ${_url}`)
         
         let response;
@@ -192,10 +207,131 @@ draft: false
     // ===================================================
 
     async function update_current_date(data_obj){
+        console.groupCollapsed("update_current_date")
+        console.log("Updating the current date")
         if ('current_date' in data_obj){
             document.getElementById("currentDateField").innerHTML = data_obj.current_date
         }
+        console.log("Date updated")
+        console.groupEnd()
         return data_obj;
+    }
+
+    // ===================================================
+    // Make table of events
+    // ===================================================
+    async function make_table_of_events(data_obj){
+        console.groupCollapsed("make_table_of_events")
+        table = document.getElementById("scalarReportsTable")
+
+        // Check if table should be built
+        if (!("events_table" in data_obj)){
+            console.log("No 'events_table' in data_obj")
+            console.groupEnd()
+            return data_obj
+        }
+
+        // --- Make table header
+        table.innerHTML += `
+        <tr>
+            <th>Event</th>
+            <th>Counts</th>
+        </tr>
+        `
+
+        // --- Make table rows
+        for (const [key, [name, value]] of Object.entries(data_obj.events_table)){
+            console.log(`Writing row for ${key}: ${name} = ${value}`)
+            table.innerHTML += `
+            <tr>
+                <td>${name}</td>
+                <td>${value}</td>
+            </tr>
+            `
+        }
+
+        console.groupEnd()
+
+        return data_obj
+    }
+
+    // ===================================================
+    // Make table of symptoms
+    // ===================================================
+    async function make_table_of_symptoms(data_obj){
+        console.groupCollapsed("make_table_of_symptoms")
+
+        // Check if table should be built
+        if (!("symptoms_table" in data_obj)){
+            console.log("No 'symptoms_table' in data_obj")
+            console.groupEnd()
+            return data_obj
+        }
+
+        // --- Make table header
+        table = document.getElementById("symptomsTable")
+        table.innerHTML += `
+        <tr>
+            <th>Symptom</th>
+            <th>Reports among hospitalized</th>
+        </tr>
+        `
+
+        // --- Make table rows
+        for (const [key, [name, value]] of Object.entries(data_obj.symptoms_table)){
+            console.log(`Writing row for ${key}: ${name} = ${value}`)
+            table.innerHTML += `
+            <tr>
+                <td>${name}</td>
+                <td>${value}</td>
+            </tr>
+            `
+        }
+
+        console.groupEnd()
+        return data_obj
+    }
+
+    // =================================================
+    // Make table of diseases (lab tests)
+    // =================================================
+    async function make_table_of_diseases(data_obj){
+        console.groupCollapsed("make_table_of_diseases")
+        console.log("Making table of diseases")
+
+        // Check if table should be built
+        if (!("diseases_table" in data_obj)){
+            console.log("No 'diseases_table' in data_obj")
+            console.groupEnd()
+            return data_obj
+        }
+
+        // --- Make table header
+        table = document.getElementById("diseasesTable")
+        table.innerHTML += `
+        <tr>
+            <th>Disease</th>
+            <th>Positive</th>
+            <th>Negative</th>
+            <th>Uncertain</th>
+        </tr>
+        `
+
+        // --- Make table rows
+        for (const [key, [name, positive, negative, uncertain]] of Object.entries(data_obj.diseases_table)){
+            console.log(`Writing row for ${key}: ${name} = ${[positive, negative, uncertain]}`)
+            table.innerHTML += `
+            <tr>
+                <td>${name}</td>
+                <td>${positive}</td>
+                <td>${negative}</td>
+                <td>${uncertain}</td>
+            </tr>
+            `
+        }
+
+        console.groupEnd()
+        return data_obj
     }
 
 
@@ -204,7 +340,7 @@ draft: false
     // =================================================
 
     async function plot_all_json_data(data_obj){
-        console.group("plot_all_json_data")
+        console.groupCollapsed("plot_all_json_data")
 
         // ============================
         // General plot setup
@@ -417,27 +553,73 @@ draft: false
         return data_obj
     }
 
+
+    // =======================
+    // THE NEWS FEED/LOG
+    // =======================
     async function update_news_feed(data_obj) {
+        console.groupCollapsed("update_news_feed")
         if ('news_feed_html' in data_obj){
             console.log("Updating the news feed")
             document.getElementById("newsFeedContent").innerHTML = data_obj.news_feed_html
+            console.log("News feed updated")
         }
+        console.groupEnd()
 
         return data_obj
     }
 
-    // -()- From website files
-    let url = "{{% mybaseurl dashboard_data.json %}}";
-    // // -()- From Google Cloud
-    // let url = "https://storage.googleapis.com/js-miniproj-413314/dashboard_data.json";
 
-    // load_json_data("/plot_data.json")  // Works only locally
-    load_json_data(url)
-        .then(update_current_date)
-        .then(update_news_feed)
-        .then(plot_all_json_data)
+    // ============================================
+    // SHOW/HIDE dashboard elements
+    // ============================================
+    async function reveal_html_elements(data_obj){
+        console.groupCollapsed("reveal_html_elements")
         
+        // --- Check if 'show_elements' is in data_obj
+        if (!('show_elements' in data_obj)){
+            document.getElementById("statusMessage").innerHTML = `
+                Error: 'show_elements' not found in data_obj
+                `
+            console.groupEnd()
+            return data_obj
+        }
+        console.log("show_elements = ", data_obj.show_elements)
 
+        // --- Show/hide elements based on the provided list
+        for (let [key, elementId] of [
+                ["plots", "plotsMainDiv"],
+                ["news_feed", "newsFeedDiv"],
+                ["events_table", "scalarReportsTableDiv"],
+                ["symptoms_table", "symptomsTableDiv"],
+                ["diseases_table", "diseasesTableDiv"],
+                ["line_list", "lineListDiv"]
+        ]){
+            if (data_obj.show_elements.includes(key)){
+                showElement(elementId)
+            }
+            else {
+                hideElement(elementId)
+            }
+        }
+
+
+        // ATTEMPT TO FIX WIDTH ISSUE: resize the window to its current size
+        // window.onresize = function() {
+        //     console.log("window resized")
+        //     window.resizeTo(window.innerWidth, window.innerHeight);
+        // };
+
+        // // Second attempt
+        // var plotDiv = document.getElementById("weeklyPlots")
+        // Plotly.relayout(
+        //     plotDiv, 
+        //     {width: plotDiv.style.width}
+        // )
+
+        console.groupEnd()   
+        return data_obj
+    }
 
 
 </script>
