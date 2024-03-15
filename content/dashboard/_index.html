@@ -175,13 +175,27 @@ draft: false
     async function load_json_data(_url){
         console.groupCollapsed("load_json_data")
         console.log(`Fetching data from ${_url}`)
+
+        // Create headers to avoid Netlify CORS issues
+        const headers = new Headers();
+        headers.append('Sec-Fetch-Dest', 'style');
+        headers.append('Sec-Fetch-Mode', 'no-cors');
+        headers.append('Sec-Fetch-Site', 'same-origin');
         
         let response;
         try {
             // response = await fetch(_url, {cache: "reload"});   // Do not check cache but update it
             // response = await fetch(_url, {cache: "no-store"});   // Do not check cache, does not cache it
-            response = await fetch(_url, {cache: "no-cache"});   // Check cache, then make a conditional request
+            // response = await fetch(_url, {cache: "no-cache"});   // Check cache, then make a conditional request
             // response = await fetch(_url, {cache: "default"});   // If stale, revalidate with server – FAILS IN CHROME!!
+            
+            response = await fetch(_url, {
+                method: "GET",
+                headers: headers,
+                cache: "no-cache" 
+                
+            });   // Check cache, then make a conditional request
+            
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
