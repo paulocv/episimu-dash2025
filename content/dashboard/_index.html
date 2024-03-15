@@ -176,11 +176,11 @@ draft: false
         console.groupCollapsed("load_json_data")
         console.log(`Fetching data from ${_url}`)
 
-        // Create headers to avoid Netlify CORS issues
-        const headers = new Headers();
-        headers.append('Sec-Fetch-Dest', 'style');
-        headers.append('Sec-Fetch-Mode', 'no-cors');
-        headers.append('Sec-Fetch-Site', 'same-origin');
+        // // Create headers to avoid Netlify CORS issues
+        // const headers = new Headers();
+        // headers.append('Sec-Fetch-Dest', 'style');
+        // headers.append('Sec-Fetch-Mode', 'no-cors');  // Useless. JS won't be able to access the response afterwards.
+        // headers.append('Sec-Fetch-Site', 'same-origin');
         
         let response;
         try {
@@ -191,7 +191,7 @@ draft: false
             
             response = await fetch(_url, {
                 method: "GET",
-                headers: headers,
+                // headers: headers,
                 cache: "no-cache" 
                 
             });   // Check cache, then make a conditional request
