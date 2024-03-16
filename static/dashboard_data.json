@@ -1,12 +1,8 @@
 {
     "current_date": "2024-03-18",
     "show_elements": [
-        "plots",
         "news_feed",
-        "events_table",
-        "symptoms_table",
-        "diseases_table",
-        "line_list"
+        "events_table"
     ],
     "weekly_hosp_data": {
         "x": [
@@ -192,68 +188,6 @@
         "deaths": [
             "Deaths",
             5
-        ]
-    },
-    "symptoms_table": {
-        "cough": [
-            "Cough",
-            17
-        ],
-        "fever": [
-            "Fever",
-            30
-        ],
-        "headache": [
-            "Headache",
-            22
-        ],
-        "chills": [
-            "Chills and/or muscle aches",
-            16
-        ],
-        "diarrhea": [
-            "Diarrhea",
-            6
-        ],
-        "vomiting": [
-            "Vomiting",
-            4
-        ],
-        "diabetic coma": [
-            "Diabetic coma",
-            2
-        ]
-    },
-    "diseases_table": {
-        "influenza_a_not_subt": [
-            "Influenza A (not subt.)",
-            38,
-            5,
-            0
-        ],
-        "influenza_ah1pdm09": [
-            "Influenza A(H1)pdm09",
-            0,
-            43,
-            0
-        ],
-        "influenza_ah3": [
-            "Influenza A(H3)",
-            1,
-            42,
-            0
-        ],
-        "sars_cov_2": [
-            "SARS-CoV-2",
-            2,
-            41,
-            0
-        ],
-        "mycoplasma_pneumoniae": [
-            "Mycoplasma pneumoniae",
-            0,
-            43,
-            0
         ]
     }
 }
