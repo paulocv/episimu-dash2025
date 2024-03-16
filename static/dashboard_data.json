@@ -225,17 +225,35 @@
         ]
     },
     "diseases_table": {
-        "dis1": [
-            "Disease 1",
-            17,
-            24,
-            2
+        "influenza_a_not_subt": [
+            "Influenza A (not subt.)",
+            38,
+            5,
+            0
         ],
-        "dis2": [
-            "Disease 2",
-            9,
-            32,
-            2
+        "influenza_ah1pdm09": [
+            "Influenza A(H1)pdm09",
+            0,
+            43,
+            0
+        ],
+        "influenza_ah3": [
+            "Influenza A(H3)",
+            1,
+            42,
+            0
+        ],
+        "sars_cov_2": [
+            "SARS-CoV-2",
+            2,
+            41,
+            0
+        ],
+        "mycoplasma_pneumoniae": [
+            "Mycoplasma pneumoniae",
+            0,
+            43,
+            0
         ]
     }
 }
