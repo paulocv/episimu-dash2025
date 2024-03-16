@@ -117,12 +117,12 @@ draft: false
         <p><a href='{{< mybaseurl "individuals.html" >}}'>View line list as HTML </a> </p> -->
 
         <!-- From local site files - Simple relative path to home (fails on GH Pages!!)-->
-        <p><a href="/individuals.csv">Dowload line list as CSV </a></p>
-        <p><a href="/individuals.html">View line list as HTML </a> </p>
+        <!-- <p><a href="/individuals.csv">Dowload line list as CSV </a></p>
+        <p><a href="/individuals.html">View line list as HTML </a> </p> -->
 
         <!-- From Gcloud -->
-        <!-- <p><a href='https://storage.googleapis.com/js-miniproj-413314/individuals.csv'>Dowload line list as CSV </a></p>
-        <p><a href='https://storage.googleapis.com/js-miniproj-413314/individuals.html'>View line list as HTML </a> </p> -->
+        <p><a href='https://storage.googleapis.com/js-miniproj-413314/individuals.csv'>Dowload line list as CSV </a></p>
+        <p><a href='https://storage.googleapis.com/js-miniproj-413314/individuals.html'>View line list as HTML </a> </p>
 
 
     </div>
@@ -153,9 +153,9 @@ draft: false
     // // -()- From website files
     // let url = "{{% mybaseurl dashboard_data.json %}}";
     // -()- From website files via simple relative path to home
-    let url = "/dashboard_data.json";
-    // // -()- From Google Cloud
-    // let url = "https://storage.googleapis.com/js-miniproj-413314/dashboard_data.json";
+    // let url = "/dashboard_data.json";
+    // -()- From Google Cloud
+    let url = "https://storage.googleapis.com/js-miniproj-413314/dashboard_data.json";
 
     // load_json_data("/plot_data.json")  // Works only locally
     load_json_data(url)
