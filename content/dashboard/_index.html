@@ -9,9 +9,9 @@ draft: false
 </head>
 
 <body>
-    <p style="text-align: center; background-color: lightcoral;"><i>
+    <!-- <p style="text-align: center; background-color: lightcoral;"><i>
         Notice: this page is a development preview. The data may be inconsistent.
-    </i></p>
+    </i></p> -->
 
     <!-- Message line for website errors -->
     <div><p id="statusMessage" style="color: chocolate;"></p></div>
@@ -112,13 +112,17 @@ draft: false
     <div id="lineListDiv" style="display: block;">
         <h2>Line list</h2>
 
-        <!-- From local site files -->
-        <p><a href='{{< mybaseurl "individuals.csv" >}}'>Dowload line list as CSV </a></p>
-        <p><a href='{{< mybaseurl "individuals.html" >}}'>View line list as HTML </a> </p>
+        <!-- From local site files (fails on Netlify)-->
+        <!-- <p><a href='{{< mybaseurl "individuals.csv" >}}'>Dowload line list as CSV </a></p>
+        <p><a href='{{< mybaseurl "individuals.html" >}}'>View line list as HTML </a> </p> -->
+
+        <!-- From local site files - Simple relative path to home (fails on GH Pages!!)-->
+        <!-- <p><a href="/individuals.csv">Dowload line list as CSV </a></p>
+        <p><a href="/individuals.html">View line list as HTML </a> </p> -->
 
         <!-- From Gcloud -->
-        <!-- <p><a href='https://storage.googleapis.com/js-miniproj-413314/individuals.csv'>Dowload line list as CSV </a></p>
-        <p><a href='https://storage.googleapis.com/js-miniproj-413314/individuals.html'>View line list as HTML </a> </p> -->
+        <p><a href='https://storage.googleapis.com/js-miniproj-413314/individuals.csv'>Dowload line list as CSV </a></p>
+        <p><a href='https://storage.googleapis.com/js-miniproj-413314/individuals.html'>View line list as HTML </a> </p>
 
 
     </div>
@@ -133,10 +137,12 @@ draft: false
 <!-- ======================================== -->
 
 <!-- Plotly -->
-<script src='{{< mybaseurl "js/plotly-2.29.1.min.js" >}}' charset="utf-8"></script>
+<!-- <script src='{{< mybaseurl "js/plotly-2.29.1.min.js" >}}' charset="utf-8"></script> -->
+<script src="/js/plotly-2.29.1.min.js" charset="utf-8"></script>
 
 <!-- My custrom scripts -->
-<script src='{{< mybaseurl "js/visibility.js" >}}'></script>
+<!-- <script src='{{< mybaseurl "js/visibility.js" >}}'></script> -->
+<script src="/js/visibility.js"></script>
 
 <script id="init">
     // Code to run on page load
@@ -144,10 +150,12 @@ draft: false
     console.log("Running the init script");
 
 
-    // -()- From website files
-    let url = "{{% mybaseurl dashboard_data.json %}}";
-    // // -()- From Google Cloud
-    // let url = "https://storage.googleapis.com/js-miniproj-413314/dashboard_data.json";
+    // // -()- From website files
+    // let url = "{{% mybaseurl dashboard_data.json %}}";
+    // -()- From website files via simple relative path to home
+    // let url = "/dashboard_data.json";
+    // -()- From Google Cloud
+    let url = "https://storage.googleapis.com/js-miniproj-413314/dashboard_data.json";
 
     // load_json_data("/plot_data.json")  // Works only locally
     load_json_data(url)
@@ -167,13 +175,27 @@ draft: false
     async function load_json_data(_url){
         console.groupCollapsed("load_json_data")
         console.log(`Fetching data from ${_url}`)
+
+        // // Create headers to avoid Netlify CORS issues
+        // const headers = new Headers();
+        // headers.append('Sec-Fetch-Dest', 'style');
+        // headers.append('Sec-Fetch-Mode', 'no-cors');  // Useless. JS won't be able to access the response afterwards.
+        // headers.append('Sec-Fetch-Site', 'same-origin');
         
         let response;
         try {
             // response = await fetch(_url, {cache: "reload"});   // Do not check cache but update it
             // response = await fetch(_url, {cache: "no-store"});   // Do not check cache, does not cache it
-            response = await fetch(_url, {cache: "no-cache"});   // Check cache, then make a conditional request
+            // response = await fetch(_url, {cache: "no-cache"});   // Check cache, then make a conditional request
             // response = await fetch(_url, {cache: "default"});   // If stale, revalidate with server – FAILS IN CHROME!!
+            
+            response = await fetch(_url, {
+                method: "GET",
+                // headers: headers,
+                cache: "no-cache" 
+                
+            });   // Check cache, then make a conditional request
+            
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -313,7 +335,7 @@ draft: false
             <th>Disease</th>
             <th>Positive</th>
             <th>Negative</th>
-            <th>Uncertain</th>
+            <th>Undefined</th>
         </tr>
         `
 
