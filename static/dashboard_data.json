@@ -1,9 +1,111 @@
 {
-    "current_date": "2025-03-11",
+    "current_date": "2025-06-10",
     "show_elements": [
+        "plots",
         "news_feed",
-        "events_table"
+        "events_table",
+        "symptoms_table",
+        "diseases_table",
+        "line_list"
     ],
+    "weekly_sympt_data": {
+        "x": [
+            "2025-01-21",
+            "2025-01-28",
+            "2025-02-04",
+            "2025-02-11",
+            "2025-02-18",
+            "2025-02-25",
+            "2025-03-04",
+            "2025-03-11",
+            "2025-03-18",
+            "2025-03-25",
+            "2025-04-01",
+            "2025-04-08",
+            "2025-04-15",
+            "2025-04-22",
+            "2025-04-29",
+            "2025-05-06",
+            "2025-05-13",
+            "2025-05-20",
+            "2025-05-27",
+            "2025-06-03"
+        ],
+        "y": [
+            7,
+            6,
+            17,
+            19,
+            60,
+            178,
+            410,
+            978,
+            2595,
+            5824,
+            11920,
+            19014,
+            22316,
+            19244,
+            13499,
+            8372,
+            4787,
+            2677,
+            1446,
+            630
+        ],
+        "type": "bar",
+        "name": "Symptomatic",
+        "visible": true
+    },
+    "cumulative_weekly_sympt_data": {
+        "x": [
+            "2025-01-21",
+            "2025-01-28",
+            "2025-02-04",
+            "2025-02-11",
+            "2025-02-18",
+            "2025-02-25",
+            "2025-03-04",
+            "2025-03-11",
+            "2025-03-18",
+            "2025-03-25",
+            "2025-04-01",
+            "2025-04-08",
+            "2025-04-15",
+            "2025-04-22",
+            "2025-04-29",
+            "2025-05-06",
+            "2025-05-13",
+            "2025-05-20",
+            "2025-05-27",
+            "2025-06-03"
+        ],
+        "y": [
+            7,
+            13,
+            30,
+            49,
+            109,
+            287,
+            697,
+            1675,
+            4270,
+            10094,
+            22014,
+            41028,
+            63344,
+            82588,
+            96087,
+            104459,
+            109246,
+            111923,
+            113369,
+            113999
+        ],
+        "type": "bar",
+        "name": "Symptomatic",
+        "visible": true
+    },
     "weekly_hosp_data": {
         "x": [
             "2025-01-21",
@@ -12,7 +114,20 @@
             "2025-02-11",
             "2025-02-18",
             "2025-02-25",
-            "2025-03-04"
+            "2025-03-04",
+            "2025-03-11",
+            "2025-03-18",
+            "2025-03-25",
+            "2025-04-01",
+            "2025-04-08",
+            "2025-04-15",
+            "2025-04-22",
+            "2025-04-29",
+            "2025-05-06",
+            "2025-05-13",
+            "2025-05-20",
+            "2025-05-27",
+            "2025-06-03"
         ],
         "y": [
             2,
@@ -20,18 +135,182 @@
             8,
             9,
             27,
-            72,
-            150
+            70,
+            147,
+            405,
+            1053,
+            2259,
+            4541,
+            7569,
+            8868,
+            7936,
+            5723,
+            3642,
+            2156,
+            1223,
+            664,
+            279
         ],
         "type": "bar",
         "name": "Hospitalized",
         "visible": true
     },
-    "news_feed_html": "<p>\n  <i>\n    [2025-03-12]\n  </i>\n  Log messages will be shown here\n</p>\n",
+    "weekly_deaths_data": {
+        "x": [
+            "2025-01-21",
+            "2025-01-28",
+            "2025-02-04",
+            "2025-02-11",
+            "2025-02-18",
+            "2025-02-25",
+            "2025-03-04",
+            "2025-03-11",
+            "2025-03-18",
+            "2025-03-25",
+            "2025-04-01",
+            "2025-04-08",
+            "2025-04-15",
+            "2025-04-22",
+            "2025-04-29",
+            "2025-05-06",
+            "2025-05-13",
+            "2025-05-20",
+            "2025-05-27",
+            "2025-06-03"
+        ],
+        "y": [
+            0,
+            0,
+            0,
+            2,
+            4,
+            6,
+            15,
+            31,
+            75,
+            188,
+            343,
+            597,
+            724,
+            672,
+            480,
+            277,
+            176,
+            91,
+            57,
+            28
+        ],
+        "type": "bar",
+        "name": "Deaths",
+        "visible": true
+    },
+    "news_feed_html": "<p>\n  <i>\n    [2025-03-12]\n  </i>\n  Log messages will be shown here\n</p>\n<p>\n  <i>\n    [2025-03-18]\n  </i>\n  Total population is 500,000 people\n</p>\n<p>\n  <i>\n    [2025-03-25]\n  </i>\n  Lab tests began to be taken\n</p>\n<p>\n  <i>\n    [2025-04-01]\n  </i>\n  Contact tracing of hospitalized individuals started\n</p>\n<p>\n  <i>\n    [2025-04-01]\n  </i>\n  We are currently experiencing a flu outbreak in Smallville that is affecting many of our friends, family members, and colleagues. In response, we are taking immediate and decisive actions to manage this situation and minimize its impact on our community. What You Can Do: Get Vaccinated: If you have not yet received your flu shot, please do so at the nearest vaccination center. Follow Guidelines: Pay close attention to personal hygiene(masking and handwashing) and adhere to the preventive measures outlined by health authorities. Stay Informed: Keep up to date with the latest information from our city's public health department.\n</p>\n<p>\n  <i>\n    [2025-04-15]\n  </i>\n  Starting this week, schools will be closed for two weeks\n</p>\n<p>\n  <i>\n    [2025-04-29]\n  </i>\n  New announcement: https://paulocv.notion.site/Announcement-2025-04-29-1b4aa8f0d5f680a5aafcc580346a9e63?pvs=4\n</p>\n<p>\n  <i>\n    [2025-05-06]\n  </i>\n  New announcement: https://paulocv.notion.site/Announcement-2025-05-06-1b4aa8f0d5f680d58a0af9fed043636e?pvs=4\n</p>\n<p>\n  <i>\n    [2025-05-06]\n  </i>\n  Schools remain closed\n</p>\n<p>\n  <i>\n    [2025-05-20]\n  </i>\n  Vaccination rates are 5% for population 18-64 years old and 8% for the population 65+\n</p>\n<p>\n  <i>\n    [2025-05-20]\n  </i>\n  Notice: Extension of School Closure and Vaccination Centers. Due to the ongoing flu outbreak, we are extending the closure of all schools for an additional two weeks. During this period, remote learning will continue to ensure educational continuity. Please check with your school for specific instructions and support. Additionally, we are setting up vaccination centers in school parking lots to facilitate access to flu vaccinations for all community members. We strongly encourage everyone to get vaccinated.\n</p>\n<p>\n  <i>\n    [2025-06-03]\n  </i>\n  School Reopening Plan Update: As we prepare to reopen schools next week, our plan includes enhanced safety measures: school nurses will monitor temperatures and vaccinations status daily and maintain regular contact with the local health department. We've increased ventilation and will regularly disinfect shared spaces. Alternative bathroom schedules and staggered passing periods will be implemented to reduce crowding. Additionally, vaccinations will be administered in school with parental permission to ensure the health and safety of our community.\n</p>\n<p>\n  <i>\n    [2025-06-03]\n  </i>\n  Vaccination rate for the population 6-17 years old is 10%; 18-64 years old is 22%; 65+ is 26%\n</p>\n<p>\n  <i>\n    [2025-06-10]\n  </i>\n  Case definition is stated: https://paulocv.notion.site/Case-definition-1b4aa8f0d5f68088825ed93951b19e71?pvs=4\n</p>\n<p>\n  <i>\n    [2025-06-10]\n  </i>\n  Notice: Return to Workplace Requirements: As we plan to transition back from remote work, please be advised that returning to the workplace will require proof of mandatory flu vaccination. This measure is to ensure the safety and health of our entire team. Employees who have not yet been vaccinated should do so at the earliest to facilitate a smooth return to the office.\n</p>\n",
     "events_table": {
         "hosp": [
             "Hospitalizations",
-            278
+            46593
+        ],
+        "deaths": [
+            "Deaths",
+            3766
+        ]
+    },
+    "symptoms_table": {
+        "cough": [
+            "Cough",
+            18637
+        ],
+        "fever": [
+            "Fever",
+            32615
+        ],
+        "headache": [
+            "Headache",
+            24228
+        ],
+        "chills": [
+            "Chills and/or muscle aches",
+            17239
+        ],
+        "diarrhea": [
+            "Diarrhea",
+            6989
+        ],
+        "vomiting": [
+            "Vomiting",
+            4659
+        ],
+        "diabetic coma": [
+            "Diabetic coma",
+            1864
+        ]
+    },
+    "diseases_table": {
+        "influenza_a_not_subtyped": [
+            "Influenza A (not subtyped)",
+            41588,
+            4922,
+            83
+        ],
+        "influenza_ah1pdm09": [
+            "Influenza A(H1)pdm09",
+            0,
+            46593,
+            0
+        ],
+        "influenza_ah3": [
+            "Influenza A(H3)",
+            60,
+            46532,
+            1
+        ],
+        "sars_cov_2": [
+            "SARS-CoV-2",
+            242,
+            46351,
+            2
+        ],
+        "rsv": [
+            "RSV",
+            1,
+            46592,
+            0
+        ],
+        "salmonellosis": [
+            "Salmonellosis",
+            1,
+            46592,
+            0
+        ],
+        "pertussis_whooping_cough": [
+            "Pertussis (Whooping cough)",
+            0,
+            46593,
+            0
+        ],
+        "streptococcus_pneumoniae": [
+            "Streptococcus pneumoniae",
+            2,
+            46591,
+            0
+        ],
+        "e_coli_o157h7": [
+            "E. coli O157:H7",
+            28,
+            46565,
+            0
+        ],
+        "rotavirus_gastroenteritis": [
+            "Rotavirus gastroenteritis",
+            0,
+            46593,
+            0
+        ],
+        "norovirus_gastroenteritis": [
+            "Norovirus gastroenteritis",
+            59,
+            46533,
+            0
         ]
     }
 }
