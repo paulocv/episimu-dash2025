@@ -1,56 +1,37 @@
 {
-    "current_date": "2024-03-18",
+    "current_date": "2025-03-11",
     "show_elements": [
         "news_feed",
-        "events_table",
-        "line_list"
+        "events_table"
     ],
     "weekly_hosp_data": {
         "x": [
-            "2024-02-12",
-            "2024-02-19",
-            "2024-02-26",
-            "2024-03-04",
-            "2024-03-11"
+            "2025-01-21",
+            "2025-01-28",
+            "2025-02-04",
+            "2025-02-11",
+            "2025-02-18",
+            "2025-02-25",
+            "2025-03-04"
         ],
         "y": [
             2,
             3,
             8,
             9,
-            24
+            27,
+            72,
+            150
         ],
         "type": "bar",
         "name": "Hospitalized",
         "visible": true
     },
-    "weekly_deaths_data": {
-        "x": [
-            "2024-02-12",
-            "2024-02-19",
-            "2024-02-26",
-            "2024-03-04",
-            "2024-03-11"
-        ],
-        "y": [
-            0,
-            0,
-            0,
-            2,
-            3
-        ],
-        "type": "bar",
-        "name": "Deaths",
-        "visible": true
-    },
+    "news_feed_html": "<p>\n  <i>\n    [2025-03-12]\n  </i>\n  Log messages will be shown here\n</p>\n",
     "events_table": {
         "hosp": [
             "Hospitalizations",
-            50
-        ],
-        "deaths": [
-            "Deaths",
-            5
+            278
         ]
     }
 }
