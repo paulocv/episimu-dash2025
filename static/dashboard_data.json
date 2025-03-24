@@ -1,86 +1,12 @@
 {
     "current_date": "2025-03-24",
     "show_elements": [
-        "plots",
         "news_feed",
-        "events_table",
-        "symptoms_table",
-        "diseases_table",
-        "line_list"
+        "events_table"
     ],
-    "weekly_sympt_data": {
-        "x": [
-            "2025-02-03",
-            "2025-02-10",
-            "2025-02-17",
-            "2025-02-24",
-            "2025-03-03",
-            "2025-03-10",
-            "2025-03-17"
-        ],
-        "y": [
-            12,
-            12,
-            27,
-            38,
-            51,
-            77,
-            131
-        ],
-        "type": "bar",
-        "name": "Symptomatic",
-        "visible": true
-    },
-    "cumulative_weekly_sympt_data": {
-        "x": [
-            "2025-02-03",
-            "2025-02-10",
-            "2025-02-17",
-            "2025-02-24",
-            "2025-03-03",
-            "2025-03-10",
-            "2025-03-17"
-        ],
-        "y": [
-            12,
-            24,
-            51,
-            89,
-            140,
-            217,
-            348
-        ],
-        "type": "bar",
-        "name": "Symptomatic",
-        "visible": true
-    },
-    "weekly_hosp_data": {
-        "x": [
-            "2025-02-03",
-            "2025-02-10",
-            "2025-02-17",
-            "2025-02-24",
-            "2025-03-03",
-            "2025-03-10",
-            "2025-03-17"
-        ],
-        "y": [
-            6,
-            3,
-            9,
-            18,
-            22,
-            27,
-            40
-        ],
-        "type": "bar",
-        "name": "Hospitalized",
-        "visible": true
-    },
     "weekly_deaths_data": {
         "x": [
-            "2025-02-03",
-            "2025-02-10",
+            "2025-01-27",
             "2025-02-17",
             "2025-02-24",
             "2025-03-03",
@@ -88,13 +14,12 @@
             "2025-03-17"
         ],
         "y": [
+            0,
             1,
             2,
-            5,
-            7,
-            9,
-            12,
-            19
+            4,
+            4,
+            13
         ],
         "type": "bar",
         "name": "Deaths",
@@ -104,53 +29,11 @@
     "events_table": {
         "hosp": [
             "Hospitalizations",
-            126
+            125
         ],
         "deaths": [
             "Deaths",
-            55
-        ]
-    },
-    "symptoms_table": {
-        "cough": [
-            "Cough",
-            25
-        ],
-        "fever": [
-            "Fever",
-            101
-        ],
-        "nonrespose": [
-            "No response to NSAIDs",
-            76
-        ],
-        "rashes": [
-            "Rashes",
-            82
-        ],
-        "chills": [
-            "Chills and/or muscle aches",
-            82
-        ],
-        "diarrhea": [
-            "Diarrhea",
-            38
-        ],
-        "vomiting": [
-            "Vomiting",
-            32
-        ],
-        "diabetic coma": [
-            "Diabetic coma",
-            23
-        ]
-    },
-    "diseases_table": {
-        "rsv": [
-            "RSV",
-            0,
-            417,
-            0
+            52
         ]
     }
 }
