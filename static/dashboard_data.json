@@ -25,7 +25,7 @@
         "name": "Deaths",
         "visible": true
     },
-    "news_feed_html": "<p>\n  <i>\n    [2025-03-24]\n  </i>\n  <a href=\"https://paulocv.notion.site/Announcement-The-game-starts-now-1bfaa8f0d5f680008f6bfbce44823568?pvs=4\">\n    Announcement: game starts\n  </a>\n</p>\n",
+    "news_feed_html": "<p>\n  <i>\n    [2025-02-17]\n  </i>\n  First deaths reported at hospitals\n</p>\n<p>\n  <i>\n    [2025-03-24]\n  </i>\n  <a href=\"https://paulocv.notion.site/Announcement-The-game-starts-now-1bfaa8f0d5f680008f6bfbce44823568?pvs=4\">\n    [Example announcement] The game begins\n  </a>\n</p>\n",
     "events_table": {
         "hosp": [
             "Hospitalizations",
